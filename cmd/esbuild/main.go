@@ -70,6 +70,7 @@ var helpText = func(colors logger.Colors) string {
   --footer:T=...            Text to be appended to each output file of type T
                             where T is one of: css | js
   --global-name=...         The name of the global for the IIFE format
+  --hash-function=base32    Hash function to use for filenames (base32 | sha256)
   --inject:F                Import the file F into all input files and
                             automatically replace matching globals with imports
   --jsx-factory=...         What to use for JSX instead of React.createElement

@@ -162,6 +162,13 @@ const (
 	FormatESModule
 )
 
+type HashFunction uint8
+
+const (
+	HashBase32 HashFunction = iota
+	HashSHA256
+)
+
 type EngineName uint8
 
 const (
@@ -295,6 +302,8 @@ type BuildOptions struct {
 	EntryNames string
 	ChunkNames string
 	AssetNames string
+
+	HashFunction HashFunction
 
 	EntryPoints         []string
 	EntryPointsAdvanced []EntryPoint

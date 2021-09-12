@@ -271,6 +271,17 @@ func validateEngine(value EngineName) compat.Engine {
 	}
 }
 
+func validateHashFunction(value HashFunction) config.HashFunction {
+	switch value {
+	case HashBase32:
+		return config.HashBase32
+	case HashSHA256:
+		return config.HashSHA256
+	default:
+		panic("Invalid hash function")
+	}
+}
+
 var versionRegex = regexp.MustCompile(`^([0-9]+)(?:\.([0-9]+))?(?:\.([0-9]+))?$`)
 
 func validateFeatures(log logger.Log, target Target, engines []Engine) (bool, compat.JSFeature, compat.CSSFeature, string) {
@@ -862,6 +873,7 @@ func rebuildImpl(
 		PreserveSymlinks:      buildOpts.PreserveSymlinks,
 		WatchMode:             buildOpts.Watch != nil,
 		Plugins:               plugins,
+		HashFunction:          validateHashFunction(buildOpts.HashFunction),
 	}
 	if options.MainFields != nil {
 		options.MainFields = append([]string{}, options.MainFields...)

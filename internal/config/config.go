@@ -191,6 +191,13 @@ const (
 	ModuleESM
 )
 
+type HashFunction uint8
+
+const (
+	HashBase32 HashFunction = iota
+	HashSHA256
+)
+
 type MaybeBool uint8
 
 const (
@@ -208,6 +215,7 @@ type Options struct {
 	MangleSyntax      bool
 	ProfilerNames     bool
 	CodeSplitting     bool
+	HashFunction      HashFunction
 	WatchMode         bool
 	AllowOverwrite    bool
 	LegalComments     LegalComments
@@ -307,9 +315,9 @@ type PathTemplate struct {
 }
 
 type PathPlaceholders struct {
-	Dir  *string
-	Name *string
-	Hash *string
+	Dir    *string
+	Name   *string
+	Hash   *string
 }
 
 func (placeholders PathPlaceholders) Get(placeholder PathPlaceholder) *string {
